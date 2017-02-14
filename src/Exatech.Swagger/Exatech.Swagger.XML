@@ -4,9 +4,6 @@
         <name>Exatech.Swagger</name>
     </assembly>
     <members>
-        <member name="T:Exatech.Swagger.Core.ApiKeyAuthenticationOption">
-            Example
-        </member>
         <member name="M:Exatech.Swagger.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
             <summary>
             Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"

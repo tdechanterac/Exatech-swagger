@@ -27,7 +27,7 @@ namespace Exatech.Swagger.Controllers
 		[SwaggerResponse(HttpStatusCode.Created, "The device was sucessfuly created", typeof(Device))]
 		[SwaggerResponse(HttpStatusCode.BadRequest, "One or more device properties have errors or are missing", typeof(BadRequestModel))]
 		[SwaggerResponse(HttpStatusCode.Conflict, "A device with the same serial number already exists")]
-		[SwaggerOperation("Create")]
+		[SwaggerOperation("CreateDevice")]
 		public async Task<IHttpActionResult> Create(DeviceResgisteringModel device) {
 			if (!ModelState.IsValid) {
 				return Content(HttpStatusCode.BadRequest, new BadRequestModel("Error while validating data", ModelState));
@@ -83,7 +83,30 @@ namespace Exatech.Swagger.Controllers
 		[SwaggerResponse(HttpStatusCode.NoContent, "You have no device registered")]
 		[SwaggerOperation("GetDevices")]
 		public async Task<IHttpActionResult> GetDevices() {
-		    return Ok(new List<Device>());
+		    return Ok(new List<Device>() {
+			    new Device() {
+				    BatteryLevel = 100,
+					FirmwareVersion = "1.0.0",
+					Id = 1,
+					MacAddress = "00:00:00:00:00",
+					OwnerId = Guid.NewGuid(),
+					RegistrationDate = DateTime.UtcNow,
+					SerialNumber = "X0189N",
+					Status = DeviceStatus.On,
+					Type = DeviceType.Light,
+			    },
+				new Device() {
+					BatteryLevel = 100,
+					FirmwareVersion = "1.1.0",
+					Id = 2,
+					MacAddress = "A8:C0:00:00:00",
+					OwnerId = Guid.NewGuid(),
+					RegistrationDate = DateTime.UtcNow,
+					SerialNumber = "TUD768",
+					Status = DeviceStatus.On,
+					Type = DeviceType.Plug,
+				}
+			});
 	    }
 
 		/// <summary>
@@ -98,7 +121,17 @@ namespace Exatech.Swagger.Controllers
 		[SwaggerResponse(HttpStatusCode.Forbidden, "You do not have right to remove this device")]
 		[SwaggerOperation("GetDevice")]
 		public async Task<IHttpActionResult> GetDevice() {
-			return Ok(new List<Device>());
+			return Ok(new Device() {
+					BatteryLevel = 100,
+					FirmwareVersion = "1.1.0",
+					Id = 2,
+					MacAddress = "A8:C0:00:00:00",
+					OwnerId = Guid.NewGuid(),
+					RegistrationDate = DateTime.UtcNow,
+					SerialNumber = "TUD768",
+					Status = DeviceStatus.On,
+					Type = DeviceType.Plug,
+			});
 		}
 	}
 }
